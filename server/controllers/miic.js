@@ -53,9 +53,8 @@ export const getPositions = async (req, res) => {
         const $ = cheerio.load(miicHtml)
         $('.views-field-view-node a', miicHtml).each(function () {
           const url = $(this).attr('href')
-          console.log('URL', url)
 
-          urls.push(url)
+          urls.push(`https://www.miic.gov.jm/${url}`)
         })
       } catch (err) {
         console.log('Error', err)

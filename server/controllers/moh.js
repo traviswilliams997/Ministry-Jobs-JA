@@ -140,6 +140,7 @@ export const getPositions = async (req, res) => {
           date: dates[i],
           salary: positions[i].salary,
           purpose: positions[i].purpose,
+          url: positionUrls[i],
         }
 
         positionsFormatted.push(formatted)
