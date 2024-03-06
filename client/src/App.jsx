@@ -1,16 +1,25 @@
 import { Box, Stack, useMediaQuery } from '@mui/material'
 import Navbar from './components/Navbar'
-import MohCard from './components/MohCard'
+import JobList from './components/JobList'
+
 import {
   initializeMoh,
   initializeMtm,
   initializeMiic,
 } from './redux/reducers/globalReducer'
-import { useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 function App() {
-  const isNonMobile = useMediaQuery('(min-width:1200px)')
+  const isNonMobile = useMediaQuery('(min-width:1000px)')
   const dispatch = useDispatch()
+
+  const mtmPosts = useSelector((state) => state.global.mtm)
+  const mohPosts = useSelector((state) => state.global.moh)
+  const miicPosts = useSelector((state) => state.global.miic)
+  const [selected, setSelected] = useState('MTM')
+
+  const [posts, setPosts] = useState(mtmPosts)
 
   const setIniitalState = async () => {
     dispatch(initializeMoh())
@@ -21,28 +30,22 @@ function App() {
   useEffect(() => {
     setIniitalState()
   }, [])
+  useEffect(() => {
+    if (selected === 'MTM') {
+      setPosts(mtmPosts)
+    }
+    if (selected === 'MOH') {
+      setPosts(mohPosts)
+    }
+    if (selected === 'MIIC') {
+      setPosts(miicPosts)
+    }
+  }, [selected])
 
   return (
     <Stack>
-      <Navbar />
-      <Box display={'flex'} justifyContent={'right'}>
-        <Box
-          display="grid"
-          gap="30px"
-          width="50vw"
-          pt={'40px'}
-          bgcolor="#333A56"
-          justifyItems={'center'}
-          gridTemplateColumns="repeat(1, minmax(0, 1fr))"
-        >
-          <MohCard />
-          <MohCard />
-          <MohCard />
-          <MohCard />
-          <MohCard />
-          <MohCard />
-        </Box>
-      </Box>
+      <Navbar selected={selected} setSelected={setSelected} />
+      <JobList selected={selected} posts={posts} />
     </Stack>
   )
 }
