@@ -147,12 +147,12 @@ export const getPositions = async (req, res) => {
       return positionsFormatted
     }
     const page1 = await getAllPositions(url)
-    // const page2 = await getAllPositions(`${url}?pagenum=2`)
-    // const page3 = await getAllPositions(`${url}?pagenum=3`)
+    const page2 = await getAllPositions(`${url}?pagenum=2`)
+    const page3 = await getAllPositions(`${url}?pagenum=3`)
 
-    // const allPages = page1.concat(page2, page3)
+    const allPages = page1.concat(page2, page3)
 
-    res.status(200).json(page1)
+    res.status(200).json(allPages)
   } catch (err) {
     console.log('getPostions Error', err)
 
