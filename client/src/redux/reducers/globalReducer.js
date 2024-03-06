@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import mohService from '../../services/moh'
+import mtmService from '../../services/mtm'
+import miicService from '../../services/miic'
 
 const intialState = {
   moh: [],
@@ -27,19 +30,27 @@ export const { setMoh, setMtm, setMiic } = globalSlice.actions
 
 export const initializeMoh = () => {
   return async (dispatch) => {
-    dispatch(setMoh())
+    const posts = await mohService.getAll()
+    console.group('Initalized moh', posts[0])
+    dispatch(setMoh(posts))
   }
 }
 
 export const initializeMtm = () => {
   return async (dispatch) => {
-    dispatch(setMtm(null))
+    const posts = await mtmService.getAll()
+
+    console.group('Initalized mtm', posts[0])
+
+    dispatch(setMtm(posts))
   }
 }
 
 export const initializeMiic = () => {
   return async (dispatch) => {
-    dispatch(setMiic())
+    const posts = await miicService.getAll()
+    console.group('Initalized miic', posts[0])
+    dispatch(setMiic(posts))
   }
 }
 
