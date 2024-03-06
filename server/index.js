@@ -1,4 +1,5 @@
 const PORT = 8000
+
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 import express from 'express'
@@ -106,16 +107,16 @@ const getPositions = async (positionUrls) => {
 
   return postions
 }
-const positionUrls = await getPostionsUrls(mohUrl)
+// const positionUrls = await getPostionsUrls(mohUrl)
 
-const positions = await getPositions(positionUrls)
+// const positions = await getPositions(positionUrls)
 
-const titles = await getPositionTitles(positionUrls)
-const dates = await getPositionDates(positionUrls)
+// const titles = await getPositionTitles(positionUrls)
+// const dates = await getPositionDates(positionUrls)
 
 // console.log('Titles', titles[0])
 
-// console.log('Positons', positions[0])
+// console.log('Positons', positions[0].split('annum').pop().split('KEY').pop())
 
 // console.log('Date', dates[0])
 
