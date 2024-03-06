@@ -1,8 +1,26 @@
 import { Box, Stack, useMediaQuery } from '@mui/material'
 import Navbar from './components/Navbar'
 import MohCard from './components/MohCard'
+import {
+  initializeMoh,
+  initializeMtm,
+  initializeMiic,
+} from './redux/reducers/globalReducer'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 function App() {
   const isNonMobile = useMediaQuery('(min-width:1200px)')
+  const dispatch = useDispatch()
+
+  const setIniitalState = async () => {
+    dispatch(initializeMoh())
+    dispatch(initializeMtm())
+    dispatch(initializeMiic())
+  }
+
+  useEffect(() => {
+    setIniitalState()
+  }, [])
 
   return (
     <Stack>
