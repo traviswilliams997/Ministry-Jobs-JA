@@ -20,7 +20,7 @@ function Navbar({ selected, setSelected }) {
           mb={'50px'}
           sx={{ display: { xs: 'none', sm: 'block' } }}
         >
-          FIND GOVERNMENT JOBS{' '}
+          FIND PUBLIC SERVICE JOBS{' '}
         </Typography>
         <Typography
           variant="h4"

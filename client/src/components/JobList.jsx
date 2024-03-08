@@ -18,15 +18,18 @@ const JobList = ({ selected, posts }) => {
         gridTemplateColumns="repeat(1, minmax(0, 1fr))"
       >
         {selected === 'MTM' &&
+          posts &&
           posts.map(({ title, text, urls }) => (
             <JobCard2 key={text} title={title} text={text} url={urls} />
           ))}
 
         {selected === 'MIIC' &&
+          posts &&
           posts.map(({ title, text, urls }) => (
             <JobCard2 key={text} title={title} text={text} url={urls} />
           ))}
         {selected === 'MOH' &&
+          posts &&
           posts.map(({ title, date, salary, purpose, url }) => (
             <JobCard1
               key={`${title}+${url}`}
