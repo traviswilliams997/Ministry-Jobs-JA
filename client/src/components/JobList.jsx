@@ -12,6 +12,7 @@ const JobList = ({ selected, posts }) => {
         display="grid"
         gap="30px"
         width="50vw"
+        minHeight="100vh"
         pt={'40px'}
         bgcolor="#333A56"
         justifyItems={'center'}
@@ -39,6 +40,11 @@ const JobList = ({ selected, posts }) => {
               purpose={purpose}
               url={url}
             />
+          ))}
+        {selected === 'MOA' &&
+          posts &&
+          posts.map(({ title, text, urls }) => (
+            <JobCard2 key={text} title={title} text={text} url={urls} />
           ))}
       </Box>
     </Box>

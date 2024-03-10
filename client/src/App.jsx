@@ -6,6 +6,7 @@ import {
   initializeMoh,
   initializeMtm,
   initializeMiic,
+  initializeMoa,
 } from './redux/reducers/globalReducer'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,6 +18,8 @@ function App() {
   const mtmPosts = useSelector((state) => state.global.mtm)
   const mohPosts = useSelector((state) => state.global.moh)
   const miicPosts = useSelector((state) => state.global.miic)
+  const moaPosts = useSelector((state) => state.global.moa)
+
   const [selected, setSelected] = useState('MTM')
 
   const [posts, setPosts] = useState(mtmPosts)
@@ -25,6 +28,7 @@ function App() {
     dispatch(initializeMoh())
     dispatch(initializeMtm())
     dispatch(initializeMiic())
+    dispatch(initializeMoa())
   }
 
   useEffect(() => {
@@ -39,6 +43,9 @@ function App() {
     }
     if (selected === 'MIIC') {
       setPosts(miicPosts)
+    }
+    if (selected === 'MOA') {
+      setPosts(moaPosts)
     }
   }, [selected])
 
