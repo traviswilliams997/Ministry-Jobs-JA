@@ -3,7 +3,7 @@ import * as cheerio from 'cheerio'
 
 export const getPositions = async (req, res) => {
   try {
-    const miicUrl = 'https://www.moa.gov.jm/careers'
+    const moaUrl = 'https://www.moa.gov.jm/careers'
 
     const getTitles = async (url) => {
       const response = await axios(url)
@@ -28,12 +28,12 @@ export const getPositions = async (req, res) => {
 
     const getTexts = async (url) => {
       const response = await axios(url)
-      const miicHtml = response.data
+      const moaHtml = response.data
 
       const texts = []
       try {
-        const $ = cheerio.load(miicHtml)
-        $('.views-field-field-job-summary', miicHtml).each(function () {
+        const $ = cheerio.load(moaHtml)
+        $('.views-field-field-job-summary', moaHtml).each(function () {
           const text = $(this).find('div .field-content').text()
           texts.push(text)
         })
@@ -46,12 +46,12 @@ export const getPositions = async (req, res) => {
 
     const getUrls = async (url) => {
       const response = await axios(url)
-      const miicHtml = response.data
+      const moaHtml = response.data
 
       const urls = []
       try {
-        const $ = cheerio.load(miicHtml)
-        $('.views-field-view-node a', miicHtml).each(function () {
+        const $ = cheerio.load(moaHtml)
+        $('.views-field-view-node a', moaHtml).each(function () {
           const url = $(this).attr('href')
 
           urls.push(`https://www.moa.gov.jm${url}`)
@@ -63,9 +63,9 @@ export const getPositions = async (req, res) => {
       return urls
     }
 
-    const titles = await getTitles(miicUrl)
-    const texts = await getTexts(miicUrl)
-    const urls = await getUrls(miicUrl)
+    const titles = await getTitles(moaUrl)
+    const texts = await getTexts(moaUrl)
+    const urls = await getUrls(moaUrl)
 
     const positions = []
 
