@@ -1,8 +1,12 @@
 import axios from 'axios'
-const mohEndpoint = '/api/moh'
+const BASE_URL = import.meta.env.VITE_BASE_URL
+const mohEndpoint = `${BASE_URL}/api/moh`
 
 const getAll = async () => {
-  const response = await axios.get(mohEndpoint)
+  const config = {
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+  }
+  const response = await axios.get(mohEndpoint, config)
   return response.data
 }
 export default {

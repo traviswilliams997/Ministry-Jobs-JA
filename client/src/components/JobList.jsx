@@ -6,6 +6,7 @@ import JobCard1 from './JobCard1'
 import { useDispatch, useSelector } from 'react-redux'
 
 const JobList = ({ selected, posts }) => {
+  if (!posts) return null
   return (
     <Box display={'flex'} justifyContent={'right'}>
       <Box
