@@ -68,6 +68,22 @@ function Navbar({ selected, setSelected }) {
           Ministry of Industry and Commerce
           {selected === 'MIIC' ? <CircleIcon color="#333A56" /> : undefined}
         </Typography>
+
+        <Typography
+          variant="h4"
+          color={'#333A56'}
+          width={'600px'}
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            '&:hover': {
+              fontWeight: 500,
+            },
+          }}
+          onClick={() => setSelected('MOA')}
+        >
+          Ministry of Agriculture and Fisheries
+          {selected === 'MOA' ? <CircleIcon color="#333A56" /> : undefined}
+        </Typography>
       </StyledToolbar>
     </Box>
   )

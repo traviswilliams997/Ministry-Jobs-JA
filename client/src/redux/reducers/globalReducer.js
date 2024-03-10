@@ -2,11 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 import mohService from '../../services/moh'
 import mtmService from '../../services/mtm'
 import miicService from '../../services/miic'
+import moaService from '../../services/moa'
 
 const intialState = {
   moh: [],
   mtm: [],
   miic: [],
+  moa: [],
 }
 const globalSlice = createSlice({
   name: 'jobs',
@@ -23,10 +25,14 @@ const globalSlice = createSlice({
       state.miic = action.payload
       return state
     },
+    setMoa: (state, action) => {
+      state.moa = action.payload
+      return state
+    },
   },
 })
 
-export const { setMoh, setMtm, setMiic } = globalSlice.actions
+export const { setMoh, setMtm, setMiic, setMoa } = globalSlice.actions
 
 export const initializeMoh = () => {
   return async (dispatch) => {
@@ -47,6 +53,13 @@ export const initializeMiic = () => {
   return async (dispatch) => {
     const posts = await miicService.getAll()
     dispatch(setMiic(posts))
+  }
+}
+
+export const initializeMoa = () => {
+  return async (dispatch) => {
+    const posts = await moaService.getAll()
+    dispatch(setMoa(posts))
   }
 }
 
