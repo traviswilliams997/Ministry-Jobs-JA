@@ -25,3 +25,6 @@ Available at https://public-service-jobs-frontend.onrender.com
 * Cross Origin Resource vulnurabilty is handled with express cors
 * Cross Site Scripting attacks are handled with express helmet
 * Logging is done with morgan
+
+**Deployment**
+* Both front and backend are deployed on Render.com and auto redeploy after commit to main branch
