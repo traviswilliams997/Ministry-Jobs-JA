@@ -1,5 +1,5 @@
-# Ministry-Jobs-JA
-# Project info
+# Ministry Jobs JA
+# Project Info
 This website scrapes job postings from the official Jamaican Ministry's career pages; so you can easily find them all in one place
 
 # Live Demo
@@ -11,14 +11,14 @@ Available at https://public-service-jobs-frontend.onrender.com
 * Users can go to the official job positing page
   
 # Behind the scenes
-**Front End**
+**Frontend**
 * Vite
 * Material UI components are used for styling
 * Redux and Redux persist for state management
 * Requests are done with axios
 * Linting is done with eslint
 
-**Backend End**
+**Backend**
 * Express and Node
 * Cheerio is used for webscraping
 * Linting is done with eslint
@@ -27,4 +27,4 @@ Available at https://public-service-jobs-frontend.onrender.com
 * Logging is done with morgan
 
 **Deployment**
-* Both front and backend are deployed on Render.com and auto redeploy after commit to main branch
+* Both frontend and backend are deployed on Render.com and auto redeploy after commit to main branch
