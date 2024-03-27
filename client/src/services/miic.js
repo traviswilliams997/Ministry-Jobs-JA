@@ -7,8 +7,6 @@ const getAll = async () => {
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
   }
   const response = await axios.get(miicEndpoint, config)
-
-  console.log('Miic', response.data)
   return response.data
 }
 export default {
