@@ -6,13 +6,15 @@ import JobCard1 from './JobCard1'
 import { useDispatch, useSelector } from 'react-redux'
 
 const JobList = ({ selected, posts }) => {
+  const isMediumScreen = useMediaQuery('(min-width:1100px)')
+
   if (!posts) return null
   return (
-    <Box display={'flex'} justifyContent={'right'}>
+    <Box display={'flex'} justifyContent={isMediumScreen ? 'right' : 'center'}>
       <Box
         display="grid"
         gap="30px"
-        width="50vw"
+        width={isMediumScreen ? '50vw ' : '100vw'}
         minHeight="100vh"
         pt={'40px'}
         bgcolor="#333A56"

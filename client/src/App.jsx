@@ -10,9 +10,12 @@ import {
 } from './redux/reducers/globalReducer'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import { theme } from './theme'
 
 function App() {
-  const isNonMobile = useMediaQuery('(min-width:1000px)')
+  const isMediumScreen = useMediaQuery('(min-width:1100px)')
+
   const dispatch = useDispatch()
 
   const mtmPosts = useSelector((state) => state.global.mtm)
@@ -50,10 +53,13 @@ function App() {
   }, [selected])
 
   return (
-    <Stack>
-      <Navbar selected={selected} setSelected={setSelected} />
-      <JobList selected={selected} posts={posts} />
-    </Stack>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Stack>
+        <Navbar selected={selected} setSelected={setSelected} />
+        <JobList selected={selected} posts={posts} />
+      </Stack>
+    </ThemeProvider>
   )
 }
 

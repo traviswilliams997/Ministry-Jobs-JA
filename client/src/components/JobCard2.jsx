@@ -1,8 +1,10 @@
 import React from 'react'
-import { Box, Typography, Link, Button } from '@mui/material'
+import { Box, Typography, Link, Button, useMediaQuery } from '@mui/material'
 import { styled } from '@mui/system'
 
 const JobCard2 = ({ title, text, url }) => {
+  const isMediumScreen = useMediaQuery('(min-width:1600px)')
+
   const StyledLink = styled(Link)(({}) => ({
     textDecoration: 'none',
   }))
@@ -18,8 +20,8 @@ const JobCard2 = ({ title, text, url }) => {
     <Box
       display={'flex'}
       flexDirection={'column'}
-      height={'250px'}
-      width={'700px'}
+      height={isMediumScreen ? '250px' : '470px'}
+      width={isMediumScreen ? '700px' : '300px'}
       bgcolor={'#52658F'}
       justifyContent={'center'}
       alignItems={'center'}
