@@ -9,6 +9,7 @@ const intialState = {
   mtm: [],
   miic: [],
   moa: [],
+  isMtmLoading: true,
 }
 const globalSlice = createSlice({
   name: 'jobs',
@@ -29,10 +30,15 @@ const globalSlice = createSlice({
       state.moa = action.payload
       return state
     },
+    setIsMtmLoading: (state, action) => {
+      state.isMtmLoading = action.payload
+      return state
+    },
   },
 })
 
-export const { setMoh, setMtm, setMiic, setMoa } = globalSlice.actions
+export const { setMoh, setMtm, setMiic, setMoa, setIsMtmLoading } =
+  globalSlice.actions
 
 export const initializeMoh = () => {
   return async (dispatch) => {
@@ -46,6 +52,7 @@ export const initializeMtm = () => {
     const posts = await mtmService.getAll()
 
     dispatch(setMtm(posts))
+    dispatch(setIsMtmLoading(false))
   }
 }
 

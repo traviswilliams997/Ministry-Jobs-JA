@@ -1,14 +1,27 @@
-import React from 'react'
-import { Box, Stack, useMediaQuery } from '@mui/material'
+import { Box, useMediaQuery, Typography } from '@mui/material'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import JobCard2 from './JobCard2'
 import JobCard1 from './JobCard1'
-import { useDispatch, useSelector } from 'react-redux'
 
+// eslint-disable-next-line react/prop-types
 const JobList = ({ selected, posts }) => {
   const isMediumScreen = useMediaQuery('(min-width:1100px)')
+  const isMtmLoading = useSelector((state) => state.global.isMtmLoading)
+  const [doneLoading, setDoneLoading] = useState(false)
 
+  const navigate = useNavigate()
+
+  const handleDoneLoading = () => {
+    navigate(0)
+    setDoneLoading(true)
+  }
+
+  console.log('MTM loading', isMtmLoading)
   if (!posts) return null
+
   return (
     <Box display={'flex'} justifyContent={isMediumScreen ? 'right' : 'center'}>
       <Box
@@ -21,19 +34,31 @@ const JobList = ({ selected, posts }) => {
         justifyItems={'center'}
         gridTemplateColumns="repeat(1, minmax(0, 1fr))"
       >
+        {isMtmLoading && (
+          <Box alignSelf={'center'}>
+            {' '}
+            <Typography vairant="h1" color={'white'} fontSize={'32px'}>
+              Posts are loading...
+            </Typography>
+          </Box>
+        )}
+        {!isMtmLoading && !doneLoading && handleDoneLoading()}
         {selected === 'MTM' &&
           posts &&
+          // eslint-disable-next-line react/prop-types
           posts.map(({ title, text, urls }) => (
             <JobCard2 key={text} title={title} text={text} url={urls} />
           ))}
 
         {selected === 'MIIC' &&
           posts &&
+          // eslint-disable-next-line react/prop-types
           posts.map(({ title, text, urls }) => (
             <JobCard2 key={text} title={title} text={text} url={urls} />
           ))}
         {selected === 'MOH' &&
           posts &&
+          // eslint-disable-next-line react/prop-types
           posts.map(({ title, date, salary, purpose, url }) => (
             <JobCard1
               key={`${title}+${url}`}
@@ -46,6 +71,7 @@ const JobList = ({ selected, posts }) => {
           ))}
         {selected === 'MOA' &&
           posts &&
+          // eslint-disable-next-line react/prop-types
           posts.map(({ title, text, urls }) => (
             <JobCard2 key={text} title={title} text={text} url={urls} />
           ))}

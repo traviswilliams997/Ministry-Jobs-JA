@@ -1,32 +1,22 @@
-import { Box, Stack, useMediaQuery } from '@mui/material'
-import Navbar from './components/Navbar'
-import JobList from './components/JobList'
-
 import {
   initializeMoh,
   initializeMtm,
   initializeMiic,
   initializeMoa,
 } from './redux/reducers/globalReducer'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { theme } from './theme'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import HomePage from './views/HomePage'
 
 function App() {
-  const isMediumScreen = useMediaQuery('(min-width:1100px)')
-
   const dispatch = useDispatch()
 
-  const mtmPosts = useSelector((state) => state.global.mtm)
-  const mohPosts = useSelector((state) => state.global.moh)
-  const miicPosts = useSelector((state) => state.global.miic)
-  const moaPosts = useSelector((state) => state.global.moa)
-
-  const [selected, setSelected] = useState('MTM')
-
-  const [posts, setPosts] = useState(mtmPosts)
-
+  useEffect(() => {
+    setIniitalState()
+  }, [])
   const setIniitalState = async () => {
     dispatch(initializeMoh())
     dispatch(initializeMtm())
@@ -34,32 +24,15 @@ function App() {
     dispatch(initializeMoa())
   }
 
-  useEffect(() => {
-    setIniitalState()
-  }, [])
-  useEffect(() => {
-    if (selected === 'MTM') {
-      setPosts(mtmPosts)
-    }
-    if (selected === 'MOH') {
-      setPosts(mohPosts)
-    }
-    if (selected === 'MIIC') {
-      setPosts(miicPosts)
-    }
-    if (selected === 'MOA') {
-      setPosts(moaPosts)
-    }
-  }, [selected])
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Stack>
-        <Navbar selected={selected} setSelected={setSelected} />
-        <JobList selected={selected} posts={posts} />
-      </Stack>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
 
