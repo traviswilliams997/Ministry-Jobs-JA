@@ -19,7 +19,6 @@ const JobList = ({ selected, posts }) => {
     setDoneLoading(true)
   }
 
-  console.log('MTM loading', isMtmLoading)
   if (!posts) return null
 
   return (
